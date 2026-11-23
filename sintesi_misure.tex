@@ -1,0 +1,545 @@
+% Misure Elettriche – Sintesi per le domande d'esame
+% Compilare con: pdflatex sintesi_misure.tex
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{array,booktabs,tabularx}
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+\renewcommand{\arraystretch}{1.25}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+
+% Colori (stessi ruoli dell'artefatto)
+\definecolor{asse}{gray}{0.62}
+\definecolor{griglia}{gray}{0.85}
+\definecolor{tinta}{gray}{0.93}
+\definecolor{quieto}{gray}{0.40}
+\definecolor{accento}{RGB}{31,111,201}
+\definecolor{notabg}{RGB}{255,247,224}
+\definecolor{notabordo}{RGB}{224,170,60}
+
+% Riquadro «Nota» (correzioni rispetto agli appunti)
+\newcommand{\nota}[1]{%
+  \par\noindent\fcolorbox{notabordo}{notabg}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{\textbf{Nota:} #1}}\par}
+
+\title{\textbf{Misure Elettriche -- Sintesi per le domande d'esame}}
+\author{}
+\date{23 novembre 2026}
+
+\begin{document}
+\maketitle
+\vspace{-2em}
+
+Questa sintesi tiene solo ciò che serve per rispondere alle 31 domande della raccolta ben coperte dagli appunti del corso (prof.\ Podestà, a.a.\ 2026/27). Dove gli appunti riportano un dato superato o un refuso, qui c'è già la versione corretta, segnalata con «Nota».
+
+% =====================================================================
+\section*{Sistema Internazionale e campioni}
+
+\subsection*{Le costanti del nuovo SI}
+
+Dal 20 maggio 2019 (Risoluzione 1 della 26\textsuperscript{a} CGPM, 2018) tutte le unità SI sono definite fissando il valore numerico esatto di sette costanti, senza incertezza.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{L c l l}
+\toprule
+\textbf{Costante} & \textbf{Simbolo} & \textbf{Valore esatto} & \textbf{Unità che fissa}\\
+\midrule
+Frequenza iperfine del cesio 133 & $\Delta\nu_{\mathrm{Cs}}$ & $9\,192\,631\,770$ Hz & secondo\\
+Velocità della luce nel vuoto & $c$ & $299\,792\,458$ m/s & metro\\
+Costante di Planck & $h$ & $6{,}626\,070\,15\cdot10^{-34}$ J$\cdot$s & kilogrammo\\
+Carica elementare & $e$ & $1{,}602\,176\,634\cdot10^{-19}$ C & ampere\\
+Costante di Boltzmann & $k$ & $1{,}380\,649\cdot10^{-23}$ J/K & kelvin\\
+Costante di Avogadro & $N_A$ & $6{,}022\,140\,76\cdot10^{23}$ mol$^{-1}$ & mole\\
+Efficienza luminosa a $540\cdot10^{12}$ Hz & $K_{\mathrm{cd}}$ & $683$ lm/W & candela\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Prima del 2019 kilogrammo, ampere, kelvin e mole si basavano su un manufatto (il prototipo in platino-iridio), su un esperimento ideale (la forza tra due conduttori), su uno stato fisico (il punto triplo dell'acqua) e sulla massa del carbonio 12. Ora sono legati a costanti della natura, quindi universali e realizzabili ovunque.
+
+\subsection*{Effetto Josephson in alternata}
+
+Due superconduttori separati da un isolante sottilissimo formano una giunzione Josephson; le coppie di Cooper la attraversano per effetto tunnel. Se la giunzione è irradiata con microonde di frequenza $f$ (decine di GHz), sulla caratteristica tensione--corrente compaiono gradini di tensione costante:
+\[
+V_n = n\,\frac{f}{K_J}, \qquad K_J = \frac{2e}{h} \approx 483\,597{,}848\ \mathrm{GHz/V}
+\]
+La tensione dipende solo dalla frequenza e da costanti fondamentali, quindi una misura di tensione diventa una misura di frequenza: l'incertezza scende sotto una parte su $10^9$. Collegando in serie migliaia di giunzioni si ottengono campioni da circa 10 V, con cui si tarano le pile Weston.
+
+\nota{alcune fonti scrivono $V = K_J\cdot f$ con $K_J = h/2e$. È un'inversione: $K_J = 2e/h$, in Hz/V. Dal 2019 $K_J$ è esatta; il valore convenzionale $K_{J\text{-}90} = 483\,597{,}9$ GHz/V è stato abrogato.}
+
+\subsection*{Effetto Hall}
+
+Un conduttore percorso da corrente $I$ e immerso in un campo magnetico $B$ perpendicolare presenta, oltre alla tensione nella direzione della corrente, una tensione trasversale $V_H$ (Hall, 1879). La resistenza di Hall $R_H = V_H/I$ è proporzionale a $B$.
+
+Effetto Hall quantistico: in un gas elettronico bidimensionale (eterostruttura GaAs/AlGaAs) a pochi kelvin e con $B$ intorno a 10 T, $R_H$ smette di crescere con $B$ e si ferma su gradini (plateau):
+\[
+R_H = \frac{h}{i\,e^2} = \frac{25\,812{,}807\ \Omega}{i}, \qquad i = 1, 2, 3, \dots
+\]
+Sui plateau la resistenza longitudinale si annulla. È un campione naturale di resistenza, riproducibile meglio di una parte su $10^9$; è in uso all'INRIM (allora IEN) dal 1\textsuperscript{o} gennaio 1990.
+
+\subsection*{Il SIT}
+
+Il SIT (Servizio di Taratura in Italia) era l'organismo che accreditava i centri di taratura del Sistema Nazionale di Taratura, istituito dalla legge 273/1991; era gestito dagli istituti metrologici primari (INRIM ed ENEA). Il sistema funziona a catena:
+\begin{enumerate}
+\item gli istituti metrologici primari realizzano e conservano i campioni nazionali;
+\item i centri di taratura accreditati (allora «centri SIT») tarano i campioni secondari confrontandoli periodicamente con quelli nazionali;
+\item i laboratori e l'industria tarano i propri strumenti rispetto ai campioni secondari.
+\end{enumerate}
+Così si garantisce la riferibilità: ogni misura è collegata ai campioni nazionali da una catena ininterrotta di tarature con incertezza dichiarata.
+
+\nota{dal 2010 il SIT è confluito in ACCREDIA, oggi l'Ente unico nazionale di accreditamento; i centri SIT sono diventati centri LAT.}
+
+% =====================================================================
+\section*{Diagramma di produzione della misura}
+
+Il diagramma è un diagramma di flusso diviso in tre fasi: Progettazione, Esecuzione e Presentazione. Le decisioni confrontano sempre un'incertezza con quella richiesta $I_R$; se il confronto fallisce si torna indietro e si corregge.
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[x=0.0208cm,y=-0.0208cm,
+    freccia/.style={draw=asse,line width=0.6pt,-latex},
+    tratt/.style={draw=asse,line width=0.6pt,-latex,dash pattern=on 3pt off 2pt},
+    t1/.style={anchor=base,font=\footnotesize},
+    t2/.style={anchor=base,font=\scriptsize,text=quieto},
+    td/.style={anchor=base,font=\footnotesize\bfseries}]
+  % geometria (stesse coordinate dell'artefatto, y verso il basso)
+  \def\ca{136}\def\cb{384}\def\cc{632}
+  \newcommand{\scatola}[4]{% cx, y, h, stile
+    \draw[#4] ({#1-96},#2) rectangle ({#1+96},{#2+#3});}
+  \tikzset{
+    normale/.style={draw=asse,line width=0.6pt,rounded corners=3pt},
+    decis/.style={draw=asse,fill=tinta,line width=0.6pt,rounded corners=3pt},
+    fallim/.style={draw=asse,line width=0.6pt,rounded corners=3pt,dash pattern=on 4pt off 3pt},
+    princ/.style={draw=accento,fill=accento!12,line width=1.1pt,rounded corners=3pt}}
+
+  % titolo
+  \node[anchor=base west,font=\small\bfseries] at (24,28)
+    {Si va avanti solo se l'incertezza resta sotto quella richiesta $I_R$};
+
+  % fasi (colonne)
+  \foreach \cx in {136,384,632}
+    \draw[draw=griglia,rounded corners=3pt] ({\cx-112},44) rectangle ({\cx+112},500);
+  \node[td] at (\ca,66) {Progettazione};
+  \node[td] at (\cb,66) {Esecuzione};
+  \node[td] at (\cc,66) {Presentazione};
+
+  % connettori
+  \draw[freccia] (\ca,124) -- (\ca,144);
+  \draw[freccia] (\ca,196) -- (\ca,216);
+  \draw[freccia] (\ca,268) -- (\ca,288);
+  \draw[freccia] (\ca,340) -- (\ca,360);
+  \draw[freccia] (\ca,412) -- (\ca,432);
+  \draw[freccia] ({\ca+96},458) -- (260,458) -- (260,76) -- (\cb,76) -- (\cb,84);
+  \draw[freccia] (\cb,136) -- (\cb,156);
+  \draw[freccia] (\cb,208) -- (\cb,228);
+  \draw[freccia] (\cb,280) -- (\cb,300);
+  \draw[tratt]   (\cb,352) -- (\cb,372);
+  \draw[tratt]   ({\cb-96},414) -- (280,414) -- (280,110) -- ({\cb-96},110);
+  \draw[freccia] ({\cb+96},326) -- (508,326) -- (508,110) -- ({\cc-96},110);
+  \draw[freccia] (\cc,136) -- (\cc,156);
+
+  % Progettazione
+  \scatola{\ca}{84}{40}{normale}
+  \node[t1] at (\ca,109) {Scopo della misurazione};
+  \scatola{\ca}{144}{52}{normale}
+  \node[t1] at (\ca,166) {Incertezza richiesta $I_R$};
+  \node[t2] at (\ca,184) {Misurando e incertezza $I_I$};
+  \scatola{\ca}{216}{52}{decis}
+  \node[td] at (\ca,238) {$I_R > I_I$ ?};
+  \node[t2] at (\ca,256) {no: affinare il modello};
+  \scatola{\ca}{288}{52}{normale}
+  \node[t1] at (\ca,310) {Metodo di misurazione};
+  \node[t2] at (\ca,328) {grandezze di influenza};
+  \scatola{\ca}{360}{52}{normale}
+  \node[t1] at (\ca,382) {Unità e campioni};
+  \node[t2] at (\ca,400) {$N$ letture, stima di $I_A$};
+  \scatola{\ca}{432}{52}{decis}
+  \node[td] at (\ca,454) {$I_A < I_R$ ?};
+  \node[t2] at (\ca,472) {no: rivedere il metodo};
+
+  % Esecuzione
+  \scatola{\cb}{84}{52}{normale}
+  \node[t1] at (\cb,106) {Campione locale};
+  \node[t2] at (\cb,124) {e schema di misurazione};
+  \scatola{\cb}{156}{52}{normale}
+  \node[t1] at (\cb,178) {Confronto e lettura};
+  \node[t2] at (\cb,196) {ripetuti per $N$ letture};
+  \scatola{\cb}{228}{52}{decis}
+  \node[td] at (\cb,250) {$D < I_R$ ?};
+  \node[t2] at (\cb,268) {$D$ = dispersione};
+  \scatola{\cb}{300}{52}{decis}
+  \node[td] at (\cb,322) {$I_O < I_R$ ?};
+  \node[t2] at (\cb,340) {$I_O$ = incertezza ottenuta};
+  \scatola{\cb}{372}{84}{fallim}
+  \node[t1] at (\cb,394) {Se un controllo fallisce};
+  \node[t2] at (\cb,414) {migliorare le grandezze};
+  \node[t2] at (\cb,430) {d'influenza, campioni};
+  \node[t2] at (\cb,446) {più stabili, ripetere};
+
+  % etichette sì/no
+  \node[anchor=base west,font=\scriptsize,text=quieto] at ({\cb+8},366) {no};
+  \node[anchor=base east,font=\scriptsize,text=quieto] at (252,452) {sì};
+  \node[anchor=base east,font=\scriptsize,text=quieto] at (502,320) {sì};
+
+  % Presentazione
+  \scatola{\cc}{84}{52}{princ}
+  \node[td] at (\cc,106) {Comunicare il risultato};
+  \node[anchor=base,font=\scriptsize] at (\cc,124) {valore, unità, $U$, $k$ e $p$};
+  \scatola{\cc}{156}{52}{normale}
+  \node[t1] at (\cc,178) {Informazioni aggiuntive};
+  \node[t2] at (\cc,196) {come è stata valutata $U$};
+\end{tikzpicture}
+\caption*{\small diagramma di produzione della misura $\cdot$ 3 fasi, 4 controlli}
+\end{figure}
+
+Ogni controllo fallito riporta indietro nella stessa fase; solo con $I_O < I_R$ si arriva alla presentazione.
+
+\subsection*{Progettazione}
+\begin{enumerate}
+\item Stabilire lo scopo della misurazione. Ne discendono l'incertezza richiesta $I_R$ e la definizione del misurando, a cui è associata un'incertezza intrinseca $I_I$.
+\item Verificare $I_R > I_I$. Se no, si affina il modello del misurando e si ridefinisce.
+\item Scegliere il metodo di misurazione e analizzare le grandezze di influenza.
+\item Scegliere l'unità di misura e i campioni, poi il numero $N$ di letture per misurazione.
+\item Stimare l'incertezza attesa $I_A$ e verificare $I_A < I_R$. Se no, si torna alla scelta del metodo; se sì, si passa all'esecuzione.
+\end{enumerate}
+
+\subsection*{Esecuzione}
+\begin{enumerate}
+\item Realizzare il campione locale dell'unità di misura e lo schema di misurazione.
+\item Eseguire il confronto e la lettura, ripetendo finché non si hanno $N$ letture.
+\item Stimare la dispersione $D$ e verificare $D < I_R$.
+\item Stimare l'incertezza ottenuta $I_O$ e verificare $I_O < I_R$.
+\item Se uno dei due controlli fallisce, migliorare il controllo delle grandezze di influenza, scegliere campioni locali più stabili e ripetere l'esecuzione.
+\end{enumerate}
+
+\subsection*{Presentazione}
+Superato $I_O < I_R$, si comunica il risultato della misurazione e poi le informazioni aggiuntive. Il risultato completo è una quaterna: valore numerico, unità di misura, incertezza e livello di confidenza. Si dichiarano anche il fattore di copertura e il modo in cui l'incertezza è stata valutata.
+
+% =====================================================================
+\section*{Incertezza di misura (GUM)}
+
+L'incertezza è il parametro, associato al risultato, che caratterizza la dispersione dei valori ragionevolmente attribuibili al misurando. Va espressa come incertezza tipo (uno scarto tipo), così che contributi diversi si possano combinare. La guida di riferimento è la GUM (JCGM 100:2008), recepita in Italia come UNI CEI 70098-3.
+
+\subsection*{Incertezza di categoria A}
+
+Si valuta con metodi statistici su $n$ osservazioni ripetute $x_1,\dots,x_n$, dopo aver corretto gli effetti sistematici. La stima del misurando è la media; la dispersione delle singole letture è lo scarto tipo sperimentale; l'incertezza tipo è lo scarto tipo della media.
+\[
+\bar{x} = \frac{1}{n}\sum_{k=1}^{n} x_k, \qquad s(x_k) = \sqrt{\frac{1}{n-1}\sum_{k=1}^{n}\left(x_k - \bar{x}\right)^2}, \qquad u(\bar{x}) = s(\bar{x}) = \frac{s(x_k)}{\sqrt{n}}
+\]
+Significato dei termini: $\bar{x}$ è la migliore stima, $n$ il numero di osservazioni, $n-1$ i gradi di libertà. $s(x_k)$ dice quanto variano le singole letture e non cala aumentando $n$; $u(\bar{x})$ dice quanto bene è stimato il centro della distribuzione e cala come $1/\sqrt{n}$.
+
+Esempio (10 letture di tensione, media 7 V, somma dei quadrati degli scarti 12 V$^2$): $u = \sqrt{12/(10\cdot 9)}$ V $\approx 0{,}37$ V.
+
+\subsection*{Incertezza di categoria B}
+
+Si valuta senza statistica, con giudizio basato su tutte le informazioni disponibili: misure precedenti, specifiche del costruttore, certificati di taratura, classe di precisione, tolleranze, dati da manuali. Quando si conoscono solo i limiti $\pm a$ (semiampiezza) si ipotizza una distribuzione e si ricava lo scarto tipo:
+
+\begin{center}
+\begin{tabularx}{\linewidth}{l L c}
+\toprule
+\textbf{Distribuzione} & \textbf{Quando si usa} & \textbf{Incertezza tipo}\\
+\midrule
+Rettangolare & solo i limiti, ogni valore ugualmente probabile & $a/\sqrt{3}$\\
+Triangolare & valori più probabili al centro & $a/\sqrt{6}$\\
+A U & valori concentrati agli estremi & $a/\sqrt{2}$\\
+Normale & certificato con $U$ e $k$ dichiarati & $U/k$\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection*{Convertire la classe di precisione in incertezza}
+
+La classe $c$ fissa l'errore massimo in ogni punto della scala come percentuale del fondo scala (f.s.). L'errore massimo è la semiampiezza di una distribuzione rettangolare:
+\[
+a = E_{max} = \frac{c}{100}\,\mathrm{f.s.}, \qquad u_B = \frac{a}{\sqrt{3}} = \frac{c \cdot \mathrm{f.s.}}{100\sqrt{3}}
+\]
+Esempio: voltmetro di classe 0,1 con portata 100 V $\rightarrow$ $a = 0{,}1$ V, $u_B = 0{,}1/\sqrt{3} \approx 0{,}058$ V, qualunque sia la lettura.
+
+Esempio d'esame: voltmetro magnetoelettrico, portata 200 V, 50 divisioni, classe 0,5, lettura 20 div $\rightarrow$ $V_m = 20\cdot200/50 = 80$ V; $a = 1$ V; $u(V_m) = 1/\sqrt{3} \approx 0{,}58$ V.
+
+\subsection*{Convertire la tolleranza di un resistore in incertezza}
+
+La tolleranza $\pm t\%$ è la semiampiezza $a = (t/100)\cdot R$. Senza altre informazioni si usa la rettangolare ($u = a/\sqrt{3}$); se i valori sono più probabili vicino al nominale, la triangolare ($u = a/\sqrt{6}$).
+
+Esempio: 1 M$\Omega$ $\pm$ 1\,\% $\rightarrow$ $a = 10$ k$\Omega$; rettangolare $u = 5{,}77$ k$\Omega$, triangolare $u = 4{,}08$ k$\Omega$. Dieci resistori in serie, indipendenti: $u_c = \sqrt{10}\cdot5{,}77$ k$\Omega \approx 18{,}3$ k$\Omega$ (rettangolare) o $\sqrt{10}\cdot4{,}08$ k$\Omega \approx 12{,}9$ k$\Omega$ (triangolare).
+
+\subsection*{Incertezza composta}
+
+Si usa quando il misurando non è misurato direttamente ma è ricavato da $N$ grandezze d'ingresso con un modello $Y = f(X_1,\dots,X_N)$. Per ingressi non correlati vale la legge di propagazione delle incertezze:
+\[
+u_c^2(y) = \sum_{i=1}^{N} \left(\frac{\partial f}{\partial x_i}\right)^2 u^2(x_i)
+\]
+Le derivate (coefficienti di sensibilità) si calcolano nelle stime $x_i$. I contributi di categoria A e B si combinano allo stesso modo, in quadratura, perché è improbabile che tutti siano contemporaneamente al limite.
+
+Casi particolari:
+\begin{itemize}
+\item modello lineare $y = a_1 x_1 + a_2 x_2 + \dots$ $\rightarrow$ $u_c^2 = a_1^2 u^2(x_1) + a_2^2 u^2(x_2) + \dots$;
+\item prodotto di potenze $y = x_1^{p_1} \cdot x_2^{p_2} \cdots$ $\rightarrow$ $(u_c/y)^2 = (p_1 u(x_1)/x_1)^2 + (p_2 u(x_2)/x_2)^2 + \dots$
+\end{itemize}
+
+Esempio: $R = V_m/I_m$ con $V_m = 80$ V, $u(V_m) = 0{,}577$ V, $I_m = 0{,}4435$ A, $u(I_m) = 0{,}944$ mA:
+\[
+u_c(R) = \sqrt{\left(\frac{1}{I_m}\right)^2 u^2(V_m) + \left(\frac{V_m}{I_m^2}\right)^2 u^2(I_m)} \approx 1{,}36\ \Omega \quad (R = 180{,}38\ \Omega)
+\]
+
+\subsection*{Incertezza estesa}
+
+Definisce un intervallo che contiene una frazione stabilita (livello di confidenza $p$) dei valori attribuibili al misurando:
+\[
+U = k \cdot u_c(y), \qquad Y = y \pm U
+\]
+$k$ è il fattore di copertura. Per una distribuzione normale:
+
+\begin{center}
+\begin{tabular}{l c c c c c c}
+\toprule
+$k$ & 1 & 1,645 & 1,960 & 2 & 2,576 & 3\\
+\midrule
+$p$ & 68,27\,\% & 90\,\% & 95\,\% & 95,45\,\% & 99\,\% & 99,73\,\%\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$k = 2$ vale circa il 95\,\% solo con molte osservazioni. Con poche letture si usa la $t$ di Student: con $n = 10$ (9 gradi di libertà) per il 95\,\% serve $k = 2{,}26$. Il risultato si scrive, per esempio, $m_s = (100{,}021\,47 \pm 0{,}000\,79)$ g, dichiarando $k$ e $p$.
+
+% =====================================================================
+\section*{Strumenti elettromeccanici}
+
+\subsection*{Classe di precisione}
+
+La classe $c$ è l'errore massimo $E_{max}$ che lo strumento può commettere in qualunque punto della scala, espresso in percento del fondo scala:
+\[
+c = \frac{E_{max}}{\mathrm{f.s.}} \cdot 100 \quad\Longleftrightarrow\quad E_{max} = \frac{c}{100}\,\mathrm{f.s.}
+\]
+Classi normalizzate: 0,05 -- 0,1 -- 0,2 -- 0,5 -- 1 -- 1,5 -- 2,5 -- 5. Esempio: voltmetro con portata 500 V e classe 0,5 $\rightarrow$ $E_{max} = 0{,}5\cdot500/100 = 2{,}5$ V in ogni punto della scala.
+
+\subsection*{Perché portare l'indice verso il fondo scala}
+
+$E_{max}$ è costante in valore assoluto su tutta la scala, quindi l'errore relativo cresce quando la lettura diminuisce:
+\[
+\varepsilon_{rel} = \frac{E_{max}}{x_{letto}} = \frac{c}{100}\cdot\frac{\mathrm{f.s.}}{x_{letto}}
+\]
+Con un'accuratezza tipica del 2--3\,\% del fondo scala, una lettura a un decimo del fondo scala ha un errore del 20--30\,\% del valore letto. Si sceglie quindi la portata più bassa che contiene il misurando, così che l'indice cada vicino al fondo scala; per non danneggiare lo strumento si parte però dalla portata più alta e si scende.
+
+\subsection*{Principio di funzionamento comune}
+
+La grandezza da misurare produce una coppia motrice $C_m$ sull'equipaggio mobile. Una molla (o un filo o nastro teso) oppone una coppia resistente proporzionale alla deviazione, $C_r = k\cdot\delta$. All'equilibrio $C_m = C_r$ e l'indice, lungo $h$, legge $\lambda = h\cdot\delta$. Una coppia smorzante (ad aria o a correnti parassite) fa raggiungere rapidamente l'equilibrio; la coppia d'attrito dei perni deve essere trascurabile.
+
+\subsection*{Strumento magnetoelettrico (a bobina mobile)}
+
+Un magnete permanente con nucleo di ferro dolce crea al traferro un campo $B$ radiale e costante. In esso ruota una bobina di $m$ spire, con lato attivo $\ell$ e larghezza $d$, avvolta su un telaietto di alluminio e percorsa dalla corrente continua $I$.
+\[
+F = m B \ell I, \qquad C_m = m B \ell d\, I = K_m I, \qquad C_m = K_r \delta \;\Rightarrow\; \delta = \frac{K_m}{K_r}\, I
+\]
+\begin{itemize}
+\item La deviazione è proporzionale a $I$: la scala è lineare.
+\item Funziona solo in continua, perché $C_m$ cambia segno con la corrente; in alternata servono raddrizzatori o convertitori.
+\item Lo smorzamento viene dalle correnti indotte nel telaietto di alluminio.
+\item Il campo intenso al traferro rende lo strumento insensibile ai campi esterni.
+\item La portata propria è piccola (da circa 10--20\,$\mu$A fino a 30--50 mA), perché la corrente passa nelle molle sottili; si estende con uno shunt (amperometro) o un resistore addizionale in serie (voltmetro). Si arriva alla classe 0,1--0,2.
+\end{itemize}
+
+\subsection*{Strumento elettrodinamico}
+
+Il magnete è sostituito da una bobina fissa percorsa da $i_f$, che crea in aria il campo in cui ruota la bobina mobile percorsa da $i_m$. Non c'è ferro, quindi la coppia è proporzionale al prodotto delle due correnti. In alternata l'equipaggio, per la sua inerzia, segue il valore medio della coppia:
+\[
+C_m = K' I_m I_f \ \text{(c.c.)}, \qquad C_m = K'' I_m I_f \cos\varphi \ \text{(c.a., valori efficaci)}
+\]
+\begin{itemize}
+\item Voltmetro: le bobine sono in serie con un resistore di manganina $R_m$; $I_m = I_f = V/Z$ e $\cos\varphi = 1$, quindi $\lambda \propto V^2$ (scala quadratica).
+\item Amperometro: bobine in parallelo con $X_f/R_f = X_m/R_m$, così che $\varphi = 0$; $\lambda \propto I^2$.
+\item Wattmetro: la bobina fissa è percorsa dalla corrente del carico, la bobina mobile (in serie a $R_m$) è sotto la tensione; $\delta \propto V I \cos\varphi = P$, scala lineare in watt.
+\item Funziona in c.c.\ e in c.a.\ e misura il vero valore efficace. Il campo in aria è debole: servono molte spire (consumo elevato), lo strumento risente dei campi esterni e si smorza ad aria. In laboratorio raggiunge la classe 0,2.
+\end{itemize}
+
+\subsection*{Errori di inserzione}
+
+Inserire uno strumento altera il sistema misurato, e quindi la grandezza che si vuole misurare; per questo si chiama errore di inserzione. È tanto più piccolo quanto minore è l'energia che lo strumento preleva.
+\begin{itemize}
+\item Voltmetro (in parallelo): l'errore tende a zero se l'impedenza del voltmetro è molto maggiore di quella equivalente vista dai punti di misura; vale circa $-Z_{eq}/Z_V$.
+\item Amperometro (in serie): l'impedenza dello strumento deve essere molto minore di quella del circuito; l'errore vale circa $-Z_A/Z_{eq}$.
+\item Uno strumento a bobina mobile come voltmetro si caratterizza con la resistenza specifica $R_{sp} = 1/I_{fs}$ ($\Omega$/V); per esempio $I_{fs} = 40\ \mu$A dà 25 k$\Omega$/V. I voltmetri elettronici hanno circa 10 M$\Omega$.
+\item Wattmetro: con il voltmetrico a monte misura $P + R_f I^2$; con il voltmetrico a valle misura $P + V^2/R_m$. Si preferisce la valle, perché $R_m$ è nota e stabile.
+\end{itemize}
+
+\subsection*{Tensione troppo elevata per la portata del voltmetro}
+
+In continua si estende la portata con un resistore addizionale $R_a$ in serie al voltmetro (di resistenza $R_V$ e portata $V_p$). Si possono usare anche un partitore resistivo o l'attenuatore d'ingresso del multimetro (per esempio 9 M$\Omega$ + 900 k$\Omega$ + 100 k$\Omega$):
+\[
+V_{max} = V_p\,\frac{R_V + R_a}{R_V} \quad\Rightarrow\quad R_a = R_V\left(\frac{V_{max}}{V_p} - 1\right)
+\]
+In alternata, sopra qualche centinaio di volt, si antepone un trasformatore di tensione (TV): il primario va in derivazione sulla linea, il secondario (100--120 V nominali) alimenta il voltmetro. Il TV porta la tensione a una portata normalizzata, così si usano strumenti di serie, e isola galvanicamente il circuito di misura per la sicurezza. La carcassa e un morsetto del secondario si collegano a terra. La lettura va moltiplicata per il rapporto nominale $K_n = V_{1n}/V_{2n}$.
+
+% =====================================================================
+\section*{Oscilloscopio analogico}
+
+\subsection*{Banda passante}
+
+La banda passante (banda utile, in MHz) è l'intervallo di frequenze dei segnali sinusoidali su cui l'oscilloscopio misura in modo affidabile. Si estende da 0 Hz fino alla frequenza di taglio a $-3$ dB, a cui l'ampiezza visualizzata scende a $1/\sqrt{2}$ (circa il 71\,\%) di quella vera, perché cala il guadagno dell'amplificatore verticale.
+\begin{itemize}
+\item Avvicinandosi al limite di banda la misura delle ampiezze diventa sempre meno precisa: $-3$ dB significa già un errore di circa il 30\,\%.
+\item Regola pratica: la banda dell'oscilloscopio deve essere almeno 5 volte quella del segnale.
+\item Anche l'ingresso si comporta da passa-basso: $R_{in} = 1$ M$\Omega$ in parallelo a $C_{in}$ di 10--30 pF; con 20 pF la reattanza vale 1 M$\Omega$ già a circa 8 kHz. L'ingresso a 50 $\Omega$ allarga la banda ma carica di più la sorgente.
+\item La sonda compensata 10X aumenta di circa 10 volte la frequenza di taglio dovuta al carico sulla sorgente.
+\end{itemize}
+
+\subsection*{Figure di Lissajous}
+
+In modalità XY la base dei tempi è esclusa: un segnale pilota la deflessione orizzontale, l'altro quella verticale. Con due sinusoidi
+\[
+x(t) = A\sin(2\pi f_1 t + \varphi_1), \qquad y(t) = B\sin(2\pi f_2 t + \varphi_2)
+\]
+in rapporto di frequenze razionale e con relazione di fase costante, sullo schermo compare una figura ferma, la figura di Lissajous. Serve a due cose.
+\begin{enumerate}
+\item Confrontare frequenze: contando le intersezioni della figura con una retta orizzontale e con una verticale,
+\[
+\frac{f_y}{f_x} = \frac{N_{\text{intersezioni con la retta orizzontale}}}{N_{\text{intersezioni con la retta verticale}}}
+\]
+(nel rapporto 2\,:\,1 la figura a otto ha 4 intersezioni orizzontali e 2 verticali).
+\item Misurare lo sfasamento $\varphi$ tra due segnali di uguale frequenza: si ottiene un'ellisse, e
+\[
+\sin\varphi = \frac{y_{\text{intercetta con l'asse }y}}{y_{max}}
+\]
+Esempio: circuito RC con $R = 1$ k$\Omega$, $C = 1\ \mu$F, $f = 100$ Hz; letture 4,505 e 8,467 $\rightarrow$ $\sin\varphi = 0{,}532$, $\varphi \approx 32{,}1^\circ$, uguale al valore teorico $\tan\varphi = \omega RC$.
+\end{enumerate}
+Casi particolari: segnali in fase $\rightarrow$ retta nel 1\textsuperscript{o} e 3\textsuperscript{o} quadrante (a 45$^\circ$ se di uguale ampiezza); in opposizione $\rightarrow$ retta nel 2\textsuperscript{o} e 4\textsuperscript{o} quadrante; in quadratura $\rightarrow$ ellisse con gli assi sugli assi coordinati, cerchio se di uguale ampiezza.
+
+\subsection*{Sonde compensate e loro taratura}
+
+La sonda 10X contiene $R_1 = 9$ M$\Omega$ in parallelo a un condensatore regolabile $C_1$. Con l'ingresso dell'oscilloscopio ($R_2 = 1$ M$\Omega$ in parallelo a $C_2$) forma un partitore: la sorgente vede 10 M$\Omega$ e il segnale è attenuato di 10 volte. Senza $C_1$ il partitore $R_1$--$R_2C_2$ è un passa-basso e distorce i fronti. La funzione di trasferimento è costante a tutte le frequenze (cancellazione polo-zero) se
+\[
+R_1 C_1 = R_2 C_2 \quad\Rightarrow\quad \frac{V_{in}}{V_s} = \frac{R_2}{R_1 + R_2} = \frac{1}{10}
+\]
+Esempio: con $C_2 = 150$ pF (oscilloscopio più cavo) serve $C_1 = R_2C_2/R_1 \approx 16{,}7$ pF.
+
+Taratura in laboratorio:
+\begin{enumerate}
+\item collegare la sonda al segnale di calibrazione a onda quadra fornito dall'oscilloscopio (tipicamente 1 kHz);
+\item regolare con un cacciavite il trimmer $C_1$ finché l'onda è perfettamente quadra: fronti verticali, tratti orizzontali piatti;
+\item leggere la forma d'onda: se gli spigoli sono esaltati (picco dopo il fronte) la sonda è sovracompensata ($R_1C_1 > R_2C_2$), se sono arrotondati è sottocompensata ($R_1C_1 < R_2C_2$);
+\item usare poi sempre la stessa sonda sullo stesso canale.
+\end{enumerate}
+L'onda quadra contiene molte armoniche, quindi controlla in un colpo solo tutta la banda di frequenze.
+
+% =====================================================================
+\section*{Oscilloscopio digitale}
+
+\subsection*{I due dati di targa principali}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}p{1.8cm} L >{\raggedright\arraybackslash}p{3.2cm}}
+\toprule
+\textbf{Dato} & \textbf{Unità} & \textbf{Che cosa dice} & \textbf{Criterio di scelta}\\
+\midrule
+Banda analogica & MHz & frequenza a cui una sinusoide è visualizzata a $1/\sqrt{2}$ dell'ampiezza vera ($-3$ dB), per il limite dell'amplificatore d'ingresso & $B_{osc} \ge 5\cdot B_{segnale}$\\
+Massima frequenza di campionamento & S/s (campioni al secondo) & velocità massima con cui il convertitore A/D acquisisce il segnale in modo affidabile & Shannon: $f_c > 2\cdot f_{max}$; in pratica $f_c \ge 5\cdot f_{max}$\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Completano il quadro la lunghezza del record $N$ (campioni in memoria; finestra visualizzata $W = N/f_c$), la risoluzione in bit del convertitore A/D e il tempo di salita ($t_{r,\text{segnale}} = \sqrt{t_{r,\text{misurato}}^2 - t_{r,\text{osc}}^2}$).
+
+\subsection*{Campionamento in tempo reale}
+
+A ogni evento di trigger il segnale viene campionato a intervalli costanti $t_s = 1/f_c$, scanditi dal clock. Gli $N_m$ campioni consecutivi riempiono la memoria di acquisizione, organizzata ad anello (i nuovi campioni sovrascrivono i più vecchi), e vengono visualizzati.
+\begin{itemize}
+\item La memoria contiene sempre gli ultimi $N_m$ campioni, cioè una finestra di durata $N_m\cdot t_s$. Esempio: 32\,000 campioni a 2 GS/s $\rightarrow$ 16 $\mu$s.
+\item Si possono vedere sia ciò che precede il trigger sia ciò che lo segue (pre-, mid- e post-trigger).
+\item I canali sono acquisiti davvero in contemporanea, mentre l'analogico alterna i canali (chopped o alternate).
+\item È l'unico metodo valido per segnali non ripetitivi e transitori (single shot), quindi tutti i DSO lo hanno.
+\item Limite: con un segnale veloce servono molti campioni per periodo, almeno 2 per Shannon e in pratica 10--25 per una ricostruzione fedele e per evitare l'aliasing percettivo. La banda utile in tempo reale è quindi limitata dalla $f_c$.
+\item Il comando time/div non cambia la $f_c$ dell'acquisizione: decide ogni quanti campioni memorizzati prenderne uno da visualizzare (decimazione). Una base dei tempi troppo lenta può dare aliasing.
+\end{itemize}
+
+\subsection*{Campionamento asincrono in tempo equivalente (random repetitive sampling)}
+
+Serve a vedere segnali molto più veloci di quanto la $f_c$ reale permetterebbe, ma solo se il segnale è ripetitivo: deve ripetersi uguale a se stesso a ogni evento di trigger.
+\begin{enumerate}
+\item La finestra visualizzata è divisa in tanti time slot quanti la risoluzione temporale desiderata. Esempio: 10 div $\times$ 0,5 ns/div = 5 ns divisi in slot da 10 ps.
+\item A ogni trigger lo strumento preleva pochi campioni a $f_c$ reale (per esempio 40 MS/s, cioè uno ogni 25 ns).
+\item Il clock di campionamento non è sincronizzato con il trigger, quindi il ritardo tra trigger e primo campione è casuale. Un interpolatore di trigger lo misura con grande precisione (10 ps).
+\item Conoscendo quel ritardo, ogni campione viene collocato nel suo time slot. Ripetizione dopo ripetizione, la casualità fa sì che prima o poi tutti gli slot vengano riempiti e la traccia si ricompone.
+\end{enumerate}
+Risultato: una frequenza di campionamento equivalente di 1/10 ps = 100 GS/s con un convertitore reale da 40 MS/s. Per la sola riproduzione per punti servono circa 20 punti per periodo, quindi si visualizzano segnali fino a circa 5 GHz (10 GHz con interpolazione lineare). Restano però i limiti della banda del canale verticale.
+
+Svantaggi: l'immagine si forma lentamente, perché servono molti periodi; non funziona con segnali singoli o non ripetitivi; non è presente in tutti i DSO.
+
+% =====================================================================
+\section*{Multimetro digitale: display a 3\texorpdfstring{$\frac{1}{2}$}{½} cifre}
+
+Un display a 3$\frac{1}{2}$ cifre ha tre cifre piene (da 0 a 9) e una «mezza» cifra a sinistra, che può valere solo 0 (spenta) o 1. Il valore massimo rappresentabile è quindi 1999: si parla di 1999 punti, o circa 2000 conteggi. Analogamente, 4$\frac{1}{2}$ cifre danno 19\,999 punti.
+
+Il numero di punti fissa la risoluzione, cioè il peso dell'ultima cifra, su ogni portata:
+\[
+\text{risoluzione} = \frac{\text{portata}}{N_{FS}}, \qquad \text{es.: } \frac{2\ \mathrm{V}}{2000} = 1\ \mathrm{mV}
+\]
+I digit compaiono anche nelle specifiche di accuratezza, $\pm$(\% della lettura + $n$ digit): $n$ digit valgono $n$ volte il peso dell'ultima cifra. Esempio: $\pm(1\,\% + 2)$ su una lettura di 100,0 V $\rightarrow$ $\pm(1{,}0 + 0{,}2)$ V, cioè valore vero tra 98,8 V e 101,2 V. Esempio sul fondo scala: 5 digit su 3$\frac{1}{2}$ cifre $= 100\cdot5/2000 = 0{,}25\,\%$ del fondo scala.
+
+La risoluzione non va confusa con l'accuratezza: la prima è solo il peso dell'ultima cifra, la seconda comprende tutte le cause di errore.
+
+% =====================================================================
+\section*{Misura di resistenza}
+
+\subsection*{In quali modi si può misurare una resistenza}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{3.0cm} L >{\raggedright\arraybackslash}p{3.6cm}}
+\toprule
+\textbf{Metodo} & \textbf{Principio} & \textbf{Campo tipico}\\
+\midrule
+Voltamperometrico & $R = V_m/I_m$ con un voltmetro e un amperometro; misura indiretta, con errore di consumo degli strumenti & ampio, precisione modesta\\
+Ohmmetro del DMM a 2 fili & il DMM inietta una corrente nota $I_0$ e misura la caduta $V_x$; $R_x = V_x/I_0$ & da circa 1 $\Omega$ a G$\Omega$; le resistenze di contatto $2R_c$ pesano sui valori bassi\\
+DMM a 4 fili (Kelvin) & due morsetti portano la corrente, due di sensing prelevano la tensione ai capi di $R_x$; le cadute di contatto sono escluse & valori bassi\\
+Ponte di Wheatstone & metodo di zero in continua & da 0,1 $\Omega$ a 1 M$\Omega$, fino a $1/10^5$\\
+Doppio ponte di Thomson & confronta le cadute su $R_x$ e su un campione $R_c$ attraversati dalla stessa corrente; elimina contatti e collegamenti & sotto 1 $\Omega$\\
+Ponti in c.a. & stesso principio con impedenze & componenti in alternata\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection*{Principio di un metodo di ponte in c.c.\ (Wheatstone)}
+
+Quattro resistenze formano i lati di un quadrilatero: l'incognita $R_x$ e tre resistenze tarate $R_1$, $R_2$, $R_3$, di cui almeno una variabile. Su una diagonale c'è l'alimentazione in continua (pila o alimentatore stabilizzato), sull'altra un rivelatore di zero (galvanometro). Si varia $R_3$ finché il galvanometro non indica corrente nulla: è la condizione di equilibrio, in cui i due vertici del rivelatore sono allo stesso potenziale.
+\[
+I_g = 0 \;\Rightarrow\; R_1 I_1 = R_2 I_2,\; R_x I_1 = R_3 I_2 \;\Rightarrow\; R_1 R_3 = R_2 R_x \;\Rightarrow\; R_x = \frac{R_1}{R_2}\,R_3
+\]
+I prodotti dei lati opposti sono uguali. Il risultato non dipende dalla tensione di alimentazione né dal galvanometro, che serve solo a rivelare lo zero; questo vale per tutti i metodi di zero. La tensione però aumenta la sensibilità (di solito qualche volt, limitata dalla corrente ammessa dai resistori).
+
+Cause di errore: sensibilità finita del rivelatore; tolleranza dei resistori; f.e.m.\ termoelettriche; resistenze di contatto (valori bassi) e di dispersione (valori alti, isolamento oltre $10^{10}\ \Omega$).
+
+Esempio: ponte con Pt100, $R_1 = 1$ k$\Omega$, $R_2 = 100$ k$\Omega$, equilibrio a $R_3 = 10\,800\ \Omega$ $\rightarrow$ $R_{Pt100} = 108\ \Omega$ $\rightarrow$ $\theta = (108/100 - 1)/0{,}004 = 20\ ^\circ$C, con $u(\theta) \approx 0{,}27\ ^\circ$C.
+
+\subsection*{Principio di un metodo di ponte in c.a.}
+
+Lo schema è lo stesso, con quattro impedenze $\dot{Z}_1\dots\dot{Z}_4$, un generatore sinusoidale di pulsazione $\omega$ (frequenza e valore efficace costanti, senza armoniche) e un rivelatore di zero in alternata. All'equilibrio:
+\[
+\dot{Z}_1\,\dot{Z}_4 = \dot{Z}_2\,\dot{Z}_3 \quad\Longleftrightarrow\quad \begin{cases} Z_1 Z_4 = Z_2 Z_3 & \text{(moduli)} \\ \varphi_1 + \varphi_4 = \varphi_2 + \varphi_3 & \text{(argomenti)} \end{cases}
+\]
+L'uguaglianza tra grandezze complesse equivale a due condizioni reali (parti reali e parti immaginarie, oppure moduli e argomenti). Servono quindi due regolazioni indipendenti. Se $\omega$ non compare nelle equazioni, l'equilibrio è indipendente dalla frequenza.
+\begin{itemize}
+\item Ponti a rapporto: due lati adiacenti sono elementi puri, e nell'equazione compare il loro rapporto (Wien e Gott se reale, Owen se immaginario). Esempio, ponte di Wien per induttanze: $R_X = (R_2/R_1)\cdot R_C$ e $L_X = (R_2/R_1)\cdot L_C$.
+\item Ponti a prodotto: due lati opposti sono elementi puri, e compare il loro prodotto (Maxwell, Schering). Esempio, ponte di Maxwell: $L_x = R_2 R_3 C_1$ e $R_x = R_2 R_3/R_1$, cioè un'induttanza misurata con un condensatore campione.
+\item Sensibilità: con $H = \dot{Z}_1/\dot{Z}_x = \dot{Z}_2/\dot{Z}_3$ si ha $\Delta V_r = E\cdot H/(1+H)^2\cdot\Delta Z_x/Z_x$. È massima per $|H| = 1$ (impedenze di ugual modulo sui vertici del rivelatore) e, a parità, per argomenti che differiscono di 90$^\circ$.
+\item Cause di errore in più rispetto alla c.c.: parametri residui dei componenti (nessun elemento è puro), capacità disperse verso l'esterno, accoppiamenti induttivi tra i lati, contenuto armonico.
+\end{itemize}
+
+\subsection*{Come si modellizza una resistenza in c.a.}
+
+Un resistore reale in alternata ha anche un'induttanza e una capacità parassite, quindi la sua impedenza non è puramente reale. Per $R$ piccole prevale l'induttanza, e si usa il modello $R$ in serie a $L$. Il resistore si caratterizza con $R$ e con la costante di tempo:
+\[
+\dot{Z} \simeq R\,(1 + j\omega\tau), \qquad \tau = \frac{L}{R}
+\]
+Per avere $\tau$ molto piccole (da $10^{-6}$ a $10^{-8}$ s) si usa l'avvolgimento bifilare: il filo è ripiegato a metà e le due metà, percorse da correnti opposte, annullano il flusso. Con molto filo cresce però la capacità tra le due metà, che prevale sopra circa 100 $\Omega$ (modello $R$ in parallelo a $C$). Per ridurla si divide l'avvolgimento in $n$ sezioni in serie da $R/n$; altri metodi sono quelli di Chaperon, di Curtis e Grover, di Ayrton e Perry.
+
+\end{document}
